@@ -96,8 +96,8 @@
 <body>
 <div class="wrap">
   <header class="top">
-    <div class="kicker">A 30-Day Devotional</div>
-    <h1>The Coming Kingdom</h1>
+    <div class="kicker" id="kicker">A 30-Day Devotional</div>
+    <h1 id="maintitle">The Coming Kingdom</h1>
   </header>
 
   <div class="langbar" role="group" aria-label="Language">
@@ -146,9 +146,9 @@
 const RAW="https://raw.githubusercontent.com/Corito53/pj-posts/main/kingdom-come-audio/";
 const TITLES={"en": {"1": "The Invitation That Was Always Waiting", "2": "Things Hidden Since the Foundation of the World", "3": "A Love Older Than Creation", "4": "The Purpose That Cannot Fail", "5": "Grace Given Before Time Began", "6": "Wisdom Prepared for Those Who Love Him", "7": "Chosen Before the Foundation of the World", "8": "Predestined for Adoption", "9": "Foreknown, Called, and Kept", "10": "Chosen From the Beginning for Salvation", "11": "The Lamb Foreknown Before the World", "12": "The Lamb Slain From the Foundation of the World", "13": "Your Name Written in Heaven", "14": "The Book of Life and the Two Destinies", "15": "Prepared — Just for You", "16": "The Father's Glad Gift", "17": "A Kingdom Granted, a Table Set", "18": "Heirs of the Kingdom", "19": "An Inheritance That Cannot Fade", "20": "Who Will Inherit — and Who Will Not", "21": "A Kingdom That Cannot Be Shaken", "22": "The Kingdom of This World Becomes His", "23": "The Blessed of the Father", "24": "I Was Hungry, and You Fed Me", "25": "When Did We See You?", "26": "A Cup of Cold Water", "27": "God Will Not Forget", "28": "The Great Division", "29": "I Go to Prepare a Place", "30": "Come, You Who Are Blessed"}, "es": {"1": "La Invitación que Siempre Te Estuvo Esperando", "2": "Cosas Escondidas Desde Antes de la Fundación del Mundo", "3": "Un Amor Más Antiguo que la Creación", "4": "El Propósito que No Puede Fallar", "5": "Gracia Dada Antes que el Tiempo Comenzara", "6": "Sabiduría Preparada para los que le Aman", "7": "Escogidos Antes de la Fundación del Mundo", "8": "Predestinados para la Adopción", "9": "Conocidos de Antemano, Llamados y Guardados", "10": "Escogidos Desde el Principio para Salvación", "11": "El Cordero Conocido Antes del Mundo", "12": "El Cordero Inmolado Desde la Fundación del Mundo", "13": "Tu Nombre Escrito en los Cielos", "14": "El Libro de la Vida y los Dos Destinos", "15": "Preparado — Solo para Ti", "16": "El Don Gozoso del Padre", "17": "Un Reino Otorgado, una Mesa Servida", "18": "Herederos del Reino", "19": "Una Herencia que No Puede Marchitarse", "20": "Quién Heredará — y Quién No", "21": "Un Reino que No Puede Ser Conmovido", "22": "El Reino de Este Mundo Llega a Ser Suyo", "23": "Los Benditos del Padre", "24": "Tuve Hambre, y Me Disteis de Comer", "25": "¿Cuándo te Vimos?", "26": "Un Vaso de Agua Fría", "27": "Dios No lo Olvidará", "28": "La Gran División", "29": "Voy a Preparar un Lugar", "30": "Venid, Vosotros los Benditos"}, "pt": {"1": "O Convite que Sempre Esteve Esperando", "2": "Coisas Ocultas Desde a Fundação do Mundo", "3": "Um Amor Mais Antigo que a Criação", "4": "O Propósito que Não Pode Falhar", "5": "Graça Dada Antes que o Tempo Começasse", "6": "Sabedoria Preparada para os que O Amam", "7": "Escolhidos Antes da Fundação do Mundo", "8": "Predestinados para a Adoção", "9": "Conhecidos de Antemão, Chamados e Guardados", "10": "Escolhidos Desde o Princípio para a Salvação", "11": "O Cordeiro Conhecido Antes do Mundo", "12": "O Cordeiro Morto Desde a Fundação do Mundo", "13": "O Teu Nome Escrito nos Céus", "14": "O Livro da Vida e os Dois Destinos", "15": "Preparado — Só para Você", "16": "O Dom Alegre do Pai", "17": "Um Reino Concedido, uma Mesa Posta", "18": "Herdeiros do Reino", "19": "Uma Herança que Não Pode Desvanecer", "20": "Quem Herdará — e Quem Não Herdará", "21": "Um Reino que Não Pode Ser Abalado", "22": "Os Reinos deste Mundo Vêm a Ser Dele", "23": "Os Benditos do Pai", "24": "Tive Fome, e Me Destes de Comer", "25": "Quando Foi que Te Vimos?", "26": "Um Copo de Água Fria", "27": "Deus Não Se Esquecerá", "28": "A Grande Separação", "29": "Vou Preparar-vos Lugar", "30": "Vinde, Vós que Sois Benditos"}};
 const STR={
-  en:{series:"The Coming Kingdom · Book 1",book:"Prepared for You",blurb:"Tap a day below to listen.",day:"Day",choose:"Choose a day",count:"30 days",foot:"Publicaciones Rodríguez Hirsch · Free to share",cover:RAW+"cover_ENU.jpg"},
-  es:{series:"El Reino Venidero · Libro 1",book:"Preparado para Ti",blurb:"Indica un día debajo para escuchar la enseñanza.",day:"Día",choose:"Elige un día",count:"30 días",foot:"Publicaciones Rodríguez Hirsch · Libre para compartir",cover:RAW+"cover_SPA.jpg"},
-  pt:{series:"O Reino que Vem · Livro 1",book:"Preparado para Você",blurb:"Indique um dia abaixo para ouvir o ensino.",day:"Dia",choose:"Escolha um dia",count:"30 dias",foot:"Publicaciones Rodríguez Hirsch · Livre para compartilhar",cover:RAW+"cover_POR.jpg"}
+  en:{kicker:"A 30-Day Devotional",title:"The Coming Kingdom",series:"The Coming Kingdom · Book 1",book:"Prepared for You",blurb:"Tap a day below to listen.",day:"Day",choose:"Choose a day",count:"30 days",foot:"Publicaciones Rodríguez Hirsch · Free to share",cover:RAW+"cover_ENU.jpg"},
+  es:{kicker:"Un Devocional de 30 Días",title:"El Reino Venidero",series:"El Reino Venidero · Libro 1",book:"Preparado para Ti",blurb:"Indica un día debajo para escuchar la enseñanza.",day:"Día",choose:"Elige un día",count:"30 días",foot:"Publicaciones Rodríguez Hirsch · Libre para compartir",cover:RAW+"cover_SPA.jpg"},
+  pt:{kicker:"Um Devocional de 30 Dias",title:"O Reino que Vem",series:"O Reino que Vem · Livro 1",book:"Preparado para Você",blurb:"Indique um dia abaixo para ouvir o ensino.",day:"Dia",choose:"Escolha um dia",count:"30 dias",foot:"Publicaciones Rodríguez Hirsch · Livre para compartilhar",cover:RAW+"cover_POR.jpg"}
 };
 let lang="en", day=1;
 const A=document.getElementById('audio');
@@ -193,6 +193,8 @@ function setLang(l){
   document.getElementById('btn-es').setAttribute('aria-pressed',l==='es');
   document.getElementById('btn-pt').setAttribute('aria-pressed',l==='pt');
   const s=STR[l];
+  document.getElementById('kicker').textContent=s.kicker;
+  document.getElementById('maintitle').textContent=s.title;
   document.getElementById('cover').src=s.cover;
   document.getElementById('series').textContent=s.series;
   document.getElementById('booktitle').textContent=s.book;
