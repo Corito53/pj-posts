@@ -50,10 +50,11 @@
   header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;font-size:1.5rem;margin:.25em 0 0;color:var(--ink)}
   .langbar{display:flex;gap:8px;justify-content:center;margin:16px 0 6px}
   .langbar button{
-    border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
-    padding:7px 16px;border-radius:999px;font-size:.85rem;font-weight:600;cursor:pointer;transition:.15s;
+    border:1.5px solid var(--gold);background:var(--surface);color:var(--ink);
+    padding:8px 18px;border-radius:999px;font-size:.9rem;font-weight:700;cursor:pointer;transition:.15s;
   }
-  .langbar button[aria-pressed="true"]{background:var(--royal);border-color:var(--royal);color:#fff}
+  .langbar button:hover{background:var(--surface-2)}
+  .langbar button[aria-pressed="true"]{background:var(--royal);border-color:var(--royal);color:#fff;box-shadow:0 3px 10px rgba(45,42,86,.25)}
   :root[data-theme="dark"] .langbar button[aria-pressed="true"],
   @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .langbar button[aria-pressed="true"]{color:#14131c}}
 
