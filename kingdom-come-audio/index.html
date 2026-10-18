@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Coming Kingdom</title>
+<style>
+  :root{
+    --bg:#f6f1e7; --surface:#fffdf8; --surface-2:#f0e8d6;
+    --ink:#2a2620; --ink-soft:#6b6252; --line:#e0d5bf;
+    --gold:#b8862f; --gold-deep:#8a6420; --royal:#2d2a56; --royal-soft:#45407e;
+    --shadow:0 10px 30px rgba(45,42,86,.12);
+    --radius:16px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#14131c; --surface:#1d1b28; --surface-2:#262337;
+      --ink:#efe9dc; --ink-soft:#a79e8c; --line:#322e44;
+      --gold:#e3b765; --gold-deep:#c99a40; --royal:#cdc8ff; --royal-soft:#b4aef0;
+      --shadow:0 12px 34px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14131c; --surface:#1d1b28; --surface-2:#262337;
+    --ink:#efe9dc; --ink-soft:#a79e8c; --line:#322e44;
+    --gold:#e3b765; --gold-deep:#c99a40; --royal:#cdc8ff; --royal-soft:#b4aef0;
+    --shadow:0 12px 34px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+    padding:0 16px 140px;
+  }
+  .wrap{max-width:720px;margin:0 auto}
+  header.top{text-align:center;padding:26px 0 10px}
+  header.top .kicker{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+  header.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:600;font-size:1.5rem;margin:.25em 0 0;color:var(--ink)}
+  .langbar{display:flex;gap:8px;justify-content:center;margin:16px 0 6px}
+  .langbar button{
+    border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+    padding:7px 16px;border-radius:999px;font-size:.85rem;font-weight:600;cursor:pointer;transition:.15s;
+  }
+  .langbar button[aria-pressed="true"]{background:var(--royal);border-color:var(--royal);color:#fff}
+  :root[data-theme="dark"] .langbar button[aria-pressed="true"],
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .langbar button[aria-pressed="true"]{color:#14131c}}
+
+  .hero{display:flex;gap:18px;align-items:center;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-top:10px}
+  .hero img{width:108px;height:auto;border-radius:10px;box-shadow:0 6px 16px rgba(0,0,0,.25);flex:none}
+  .hero .meta .series{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+  .hero .meta h2{font-family:Georgia,serif;font-size:1.25rem;margin:.2em 0 .15em;font-weight:600}
+  .hero .meta p{margin:0;color:var(--ink-soft);font-size:.9rem}
+
+  .nowcard{background:linear-gradient(160deg,var(--royal),var(--royal-soft));color:#fff;border-radius:var(--radius);
+    padding:18px 18px 16px;margin-top:16px;box-shadow:var(--shadow)}
+  .nowcard .daylabel{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;opacity:.8;font-weight:700}
+  .nowcard h3{font-family:Georgia,serif;font-weight:600;font-size:1.3rem;margin:.25em 0 0;min-height:1.6em}
+  .seek{display:flex;align-items:center;gap:10px;margin-top:14px;font-variant-numeric:tabular-nums;font-size:.76rem}
+  .seek input[type=range]{flex:1;accent-color:var(--gold);height:4px}
+  .seek .t{opacity:.85;min-width:38px;text-align:center}
+  .controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:12px}
+  .controls button{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;
+    width:48px;height:48px;border-radius:50%;cursor:pointer;display:grid;place-items:center;transition:.15s}
+  .controls button:hover{background:rgba(255,255,255,.22)}
+  .controls button.play{width:64px;height:64px;background:var(--gold);border-color:var(--gold)}
+  .controls button.play:hover{background:var(--gold-deep)}
+  .controls svg{width:22px;height:22px;fill:#fff}
+  .controls .play svg{width:28px;height:28px;fill:#1c1a2e}
+
+  .grid-h{display:flex;align-items:baseline;justify-content:space-between;margin:26px 2px 10px}
+  .grid-h span{font-family:Georgia,serif;font-size:1.05rem;color:var(--ink)}
+  .grid-h small{color:var(--ink-soft);font-size:.8rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px}
+  .grid button{aspect-ratio:1;border:1px solid var(--line);background:var(--surface);color:var(--ink);
+    border-radius:12px;cursor:pointer;font-weight:700;font-size:1rem;transition:.12s;position:relative}
+  .grid button:hover{border-color:var(--gold)}
+  .grid button[aria-current="true"]{background:var(--gold);border-color:var(--gold);color:#1c1a2e}
+  footer{text-align:center;color:var(--ink-soft);font-size:.8rem;margin-top:30px;line-height:1.6}
+  footer .by{font-family:Georgia,serif;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="kicker">A 30-Day Devotional</div>
+    <h1>The Coming Kingdom</h1>
+  </header>
+
+  <div class="langbar" role="group" aria-label="Language">
+    <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+    <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+  </div>
+
+  <section class="hero">
+    <img id="cover" alt="Book cover">
+    <div class="meta">
+      <div class="series" id="series">The Coming Kingdom · Book 1</div>
+      <h2 id="booktitle">Prepared for You</h2>
+      <p id="blurb">Tap a day below to listen.</p>
+    </div>
+  </section>
+
+  <section class="nowcard" aria-live="polite">
+    <div class="daylabel" id="daylabel">Day 1</div>
+    <h3 id="nowtitle">—</h3>
+    <div class="seek">
+      <span class="t" id="cur">0:00</span>
+      <input type="range" id="seek" min="0" max="1000" value="0" step="1" aria-label="Seek">
+      <span class="t" id="dur">0:00</span>
+    </div>
+    <div class="controls">
+      <button id="prev" aria-label="Previous day" onclick="step(-1)"><svg viewBox="0 0 24 24"><path d="M7 6h2v12H7zm3 6l8 6V6z"/></svg></button>
+      <button id="replay" aria-label="Restart this day" onclick="replay()"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg></button>
+      <button class="play" id="play" aria-label="Play" onclick="toggle()"><svg id="playicon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+      <button id="next" aria-label="Next day" onclick="step(1)"><svg viewBox="0 0 24 24"><path d="M15 6h2v12h-2zM6 18l8-6-8-6z"/></svg></button>
+    </div>
+  </section>
+
+  <div class="grid-h"><span id="chooseh">Choose a day</span><small id="counth">30 days</small></div>
+  <div class="grid" id="grid" role="group" aria-label="Day selector"></div>
+
+  <footer>
+    <div class="by">Rev. Dr. Willie Rodríguez Hirsch</div>
+    <div id="foot">Publicaciones Rodríguez Hirsch · Free to share</div>
+  </footer>
+</div>
+
+<audio id="audio" preload="metadata"></audio>
+
+<script>
+const RAW="https://raw.githubusercontent.com/Corito53/pj-posts/main/kingdom-come-audio/";
+const TITLES={"en": {"1": "The Invitation That Was Always Waiting", "2": "Things Hidden Since the Foundation of the World", "3": "A Love Older Than Creation", "4": "The Purpose That Cannot Fail", "5": "Grace Given Before Time Began", "6": "Wisdom Prepared for Those Who Love Him", "7": "Chosen Before the Foundation of the World", "8": "Predestined for Adoption", "9": "Foreknown, Called, and Kept", "10": "Chosen From the Beginning for Salvation", "11": "The Lamb Foreknown Before the World", "12": "The Lamb Slain From the Foundation of the World", "13": "Your Name Written in Heaven", "14": "The Book of Life and the Two Destinies", "15": "Prepared — Just for You", "16": "The Father's Glad Gift", "17": "A Kingdom Granted, a Table Set", "18": "Heirs of the Kingdom", "19": "An Inheritance That Cannot Fade", "20": "Who Will Inherit — and Who Will Not", "21": "A Kingdom That Cannot Be Shaken", "22": "The Kingdom of This World Becomes His", "23": "The Blessed of the Father", "24": "I Was Hungry, and You Fed Me", "25": "When Did We See You?", "26": "A Cup of Cold Water", "27": "God Will Not Forget", "28": "The Great Division", "29": "I Go to Prepare a Place", "30": "Come, You Who Are Blessed"}, "es": {"1": "La Invitación que Siempre Te Estuvo Esperando", "2": "Cosas Escondidas Desde Antes de la Fundación del Mundo", "3": "Un Amor Más Antiguo que la Creación", "4": "El Propósito que No Puede Fallar", "5": "Gracia Dada Antes que el Tiempo Comenzara", "6": "Sabiduría Preparada para los que le Aman", "7": "Escogidos Antes de la Fundación del Mundo", "8": "Predestinados para la Adopción", "9": "Conocidos de Antemano, Llamados y Guardados", "10": "Escogidos Desde el Principio para Salvación", "11": "El Cordero Conocido Antes del Mundo", "12": "El Cordero Inmolado Desde la Fundación del Mundo", "13": "Tu Nombre Escrito en los Cielos", "14": "El Libro de la Vida y los Dos Destinos", "15": "Preparado — Solo para Ti", "16": "El Don Gozoso del Padre", "17": "Un Reino Otorgado, una Mesa Servida", "18": "Herederos del Reino", "19": "Una Herencia que No Puede Marchitarse", "20": "Quién Heredará — y Quién No", "21": "Un Reino que No Puede Ser Conmovido", "22": "El Reino de Este Mundo Llega a Ser Suyo", "23": "Los Benditos del Padre", "24": "Tuve Hambre, y Me Disteis de Comer", "25": "¿Cuándo te Vimos?", "26": "Un Vaso de Agua Fría", "27": "Dios No lo Olvidará", "28": "La Gran División", "29": "Voy a Preparar un Lugar", "30": "Venid, Vosotros los Benditos"}};
+const STR={
+  en:{series:"The Coming Kingdom · Book 1",book:"Prepared for You",blurb:"Tap a day below to listen.",day:"Day",choose:"Choose a day",count:"30 days",foot:"Publicaciones Rodríguez Hirsch · Free to share",cover:RAW+"cover_ENU.jpg"},
+  es:{series:"El Reino Venidero · Libro 1",book:"Preparado para Ti",blurb:"Toca un día abajo para escuchar.",day:"Día",choose:"Elige un día",count:"30 días",foot:"Publicaciones Rodríguez Hirsch · Libre para compartir",cover:RAW+"cover_SPA.jpg"}
+};
+let lang="en", day=1;
+const A=document.getElementById('audio');
+const pad=n=>String(n).padStart(2,'0');
+const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+pad(s%60)};
+function src(){return RAW+(lang==='en'?'ENU':'SPA')+"/Day_"+pad(day)+".mp3"}
+
+function buildGrid(){
+  const g=document.getElementById('grid');g.innerHTML='';
+  for(let d=1;d<=30;d++){
+    const b=document.createElement('button');
+    b.textContent=d; b.setAttribute('aria-label',STR[lang].day+' '+d);
+    if(d===day)b.setAttribute('aria-current','true');
+    b.onclick=()=>{select(d,true)};
+    g.appendChild(b);
+  }
+}
+function paintGrid(){[...document.getElementById('grid').children].forEach((b,i)=>{
+  b.setAttribute('aria-label',STR[lang].day+' '+(i+1));
+  if(i+1===day)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current');});}
+
+function load(){
+  A.src=src();
+  document.getElementById('daylabel').textContent=STR[lang].day+' '+day;
+  document.getElementById('nowtitle').textContent=TITLES[lang][day];
+  document.getElementById('seek').value=0;
+  document.getElementById('cur').textContent="0:00";
+  document.getElementById('dur').textContent="0:00";
+}
+function select(d,autoplay){day=d;paintGrid();load();if(autoplay){A.play().catch(()=>{});}}
+function step(n){let d=day+n;if(d<1)d=1;if(d>30)d=30;select(d,true);}
+function replay(){A.currentTime=0;A.play().catch(()=>{});}
+function toggle(){if(A.paused)A.play().catch(()=>{});else A.pause();}
+
+function setLang(l){
+  if(l===lang)return;
+  const wasPlaying=!A.paused;
+  lang=l;
+  document.documentElement.lang=l;
+  document.getElementById('btn-en').setAttribute('aria-pressed',l==='en');
+  document.getElementById('btn-es').setAttribute('aria-pressed',l==='es');
+  const s=STR[l];
+  document.getElementById('cover').src=s.cover;
+  document.getElementById('series').textContent=s.series;
+  document.getElementById('booktitle').textContent=s.book;
+  document.getElementById('blurb').textContent=s.blurb;
+  document.getElementById('chooseh').textContent=s.choose;
+  document.getElementById('counth').textContent=s.count;
+  document.getElementById('foot').textContent=s.foot;
+  document.getElementById('cover').alt=s.book;
+  paintGrid();load();
+  if(wasPlaying)A.play().catch(()=>{});
+  try{localStorage.setItem('kc_lang',l)}catch(e){}
+}
+
+// player wiring
+const playicon=document.getElementById('playicon');
+A.addEventListener('play',()=>{playicon.innerHTML='<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>';document.getElementById('play').setAttribute('aria-label','Pause');});
+A.addEventListener('pause',()=>{playicon.innerHTML='<path d="M8 5v14l11-7z"/>';document.getElementById('play').setAttribute('aria-label','Play');});
+A.addEventListener('loadedmetadata',()=>{document.getElementById('dur').textContent=fmt(A.duration);});
+A.addEventListener('timeupdate',()=>{
+  document.getElementById('cur').textContent=fmt(A.currentTime);
+  if(A.duration){document.getElementById('seek').value=Math.round(A.currentTime/A.duration*1000);}
+});
+A.addEventListener('ended',()=>{if(day<30)step(1);});
+document.getElementById('seek').addEventListener('input',e=>{if(A.duration)A.currentTime=e.target.value/1000*A.duration;});
+
+// init
+try{const sl=localStorage.getItem('kc_lang');if(sl==='es'){/* set after build */}}catch(e){}
+document.getElementById('cover').src=STR.en.cover;
+document.getElementById('cover').alt=STR.en.book;
+buildGrid();load();
+try{if(localStorage.getItem('kc_lang')==='es')setLang('es');}catch(e){}
+</script>
+</body>
+</html>
